@@ -1,5 +1,5 @@
 
-
+//making a component
 var Profle= React.createClass({
     render(){
 
