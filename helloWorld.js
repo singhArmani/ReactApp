@@ -41,9 +41,9 @@ var Heading = React.createClass({
 var Row = React.createClass({
     render(){
         return (<tr>
-            <td>{this.props.changeSet.who}</td>
-            <td>{this.props.changeSet.when}</td>
-            <td>{this.props.changeSet.where}</td>
+            <td>{this.props.myChangeSet.who}</td>
+            <td>{this.props.myChangeSet.when}</td>
+            <td>{this.props.myChangeSet.where}</td>
         </tr>);
     }
 });
@@ -62,7 +62,18 @@ var Headings = React.createClass({
         var  headings = this.props.headings.map((heading)=>{
             return(<Heading myHeading ={heading}/>); //it will return a small Heading Component
         });
+
+        return (<thead><tr>{headings}</tr></thead>);
     }
 });
 
+//lets build the Rows Component too
+var Rows = React.createClass({
+    render(){
+        var Rows = this.props.changeSets.map((changeSet)=>{
+            return(<Row myChangeSet = {changeSet}/>); //return smaller Row compoent with object passed as props
+        });
 
+        return (<tbody>{Rows}</tbody>);
+    }
+}):
