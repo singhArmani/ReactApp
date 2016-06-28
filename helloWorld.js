@@ -1,39 +1,10 @@
 
 //making a component
-var Profle= React.createClass({
+var App= React.createClass({
     render(){
 
 
-        //using destructuring syntax E6
-        var {myHeadings,myData,title} = this.props;
 
-
-        var rows = myData.map((row)=> {
-            return <tr>
-                <td>{row.who}</td>
-                <td>{row.when}</td>
-                <td>{row.where}</td>
-            </tr>;
-        })
-
-
-        //Headings
-        var headings = myHeadings.map((heading)=>{
-            return <th>{heading}</th>
-        })
-
-        return (<div>
-            <h1>{this.props.title}</h1>
-            <table>
-                <thead>
-                    {headings}
-                </thead>
-
-                <tbody>
-                    {rows}
-                </tbody>
-        </table>
-            </div>);
     }
 });
 
@@ -52,7 +23,27 @@ var Data = [{
 var Headings = ['Author','Where','Description'];
 
 ReactDOM.render(
-    <Profle myData ={Data} title="Profile Heading" myHeadings ={Headings}/>,document.getElementById('example')
+    <App myData ={Data} title="Recent Changes" myHeadings ={Headings}/>,document.getElementById('example')
     
 );
 
+
+
+//Disecting into Small components
+//small heading component
+var Heading = React.createClass({
+    render(){
+        return <th>{this.props.heading}</th>;//this heading here will be passed as props to the Heading component.
+    }
+});
+
+//small row component
+var Row = React.createClass({
+    render(){
+        return (<tr>
+            <td>{this.props.changeSet.who}</td>
+            <td>{this.props.changeSet.when}</td>
+            <td>{this.props.changeSet.where}</td>
+        </tr>);
+    }
+});
