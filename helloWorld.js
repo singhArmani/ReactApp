@@ -1,50 +1,9 @@
 
-//making a component
-var App= React.createClass({
-    render(){
-
-
-
-    }
-});
-
-//our Data
-var Data = [{
-    'who': 'Aman Singh',
-    'when': '3 mins ago',
-    'where': 'Sydney Opera House'
-},
-    {
-        'who': 'Raman Singh',
-        'when': '5 mins ago',
-        'where': 'Imax'
-    }];
-
-var Headings = ['Author','Where','Description'];
-
-ReactDOM.render(
-    <App myData ={Data} title="Recent Changes" headings ={Headings}/>,document.getElementById('example')
-    
-);
-
-
-
 //Disecting into Small components
 //small heading component
 var Heading = React.createClass({
     render(){
         return <th>{this.props.myHeading}</th>;//this heading here will be passed as props to the Heading component.
-    }
-});
-
-//small row component
-var Row = React.createClass({
-    render(){
-        return (<tr>
-            <td>{this.props.myChangeSet.who}</td>
-            <td>{this.props.myChangeSet.when}</td>
-            <td>{this.props.myChangeSet.where}</td>
-        </tr>);
     }
 });
 
@@ -67,13 +26,59 @@ var Headings = React.createClass({
     }
 });
 
+
+
+//small row component
+var Row = React.createClass({
+    render(){
+        return (<tr>
+            <td>{this.props.myChangeSet.who}</td>
+            <td>{this.props.myChangeSet.when}</td>
+            <td>{this.props.myChangeSet.where}</td>
+        </tr>);
+    }
+});
+
+
 //lets build the Rows Component too
 var Rows = React.createClass({
     render(){
-        var Rows = this.props.changeSets.map((changeSet)=>{
+        var rows = this.props.changeSets.map((changeSet)=>{
             return(<Row myChangeSet = {changeSet}/>); //return smaller Row compoent with object passed as props
         });
 
-        return (<tbody>{Rows}</tbody>);
+        return (<tbody>{rows}</tbody>);
     }
-}):
+});
+
+
+//making a Top level component
+var App = React.createClass({
+    render(){
+
+        return <table className="table">
+            <Headings headings={this.props.myHeadings} />
+            <Rows changeSets = {this.props.myData}/>
+        </table>;
+
+    }
+});
+
+//our Data
+var Data = [{
+    'who': 'Aman Singh',
+    'when': '3 mins ago',
+    'where': 'Sydney Opera House'
+},
+    {
+        'who': 'Raman Singh',
+        'when': '5 mins ago',
+        'where': 'Imax'
+    }];
+
+var headings = ['Author','Where','Description'];
+
+ReactDOM.render(
+    <App myData ={Data}  myHeadings ={headings}/>,document.getElementById('example')
+
+);
