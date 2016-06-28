@@ -49,6 +49,14 @@ var Row = React.createClass({
 });
 
 //Building upper level components
+
+/*
+ We are iterating over the list of titles and converting them into a list of the Heading
+ components. The Headings component is controlling how the props are passed to
+ the individual Heading components. In a sense, individual Heading components are
+ owned by Headings."
+
+ */
 var Headings = React.createClass({
     render(){
         var  headings = this.props.headings.map((heading)=>{
@@ -56,3 +64,5 @@ var Headings = React.createClass({
         });
     }
 });
+
+
