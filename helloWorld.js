@@ -51,6 +51,17 @@ var Rows = React.createClass({
     }
 });
 
+//Namespaced Components
+//Need to represent top level component as custom component rather than using <table> element
+
+var RecentChangesTable = React.createClass({
+    render(){
+        return <table>
+            {this.props.children}
+        </table>;
+    }
+});
+
 
 //making a Top level component
 var App = React.createClass({
@@ -66,7 +77,7 @@ var App = React.createClass({
 
 //our Data
 var Data = [{
-    'who': 'Aman Singh',
+    'who': 'Malkeet Singh',
     'when': '3 mins ago',
     'where': 'Sydney Opera House'
 },
