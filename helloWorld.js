@@ -3,7 +3,12 @@
 //small heading component
 var Heading = React.createClass({
     render(){
-        return <th>{this.props.myHeading}</th>;//this heading here will be passed as props to the Heading component.
+        //defining a JavaScript Object in CamelCase fashion for styling
+        var headingStyle = {backgroundColor: 'FloralWhite',
+                            fontsize:'19px'
+                            };
+        //using it as inline styling
+        return <th style={headingStyle}>{this.props.myHeading}</th>;//this heading here will be passed as props to the Heading component.
     }
 });
 
@@ -31,7 +36,9 @@ var Headings = React.createClass({
 //small row component
 var Row = React.createClass({
     render(){
-        return (<tr>
+        var trStyle = {backgroundColor:'aliceblue'
+                     }
+        return (<tr style={trStyle}>
             <td>{this.props.myChangeSet.who}</td>
             <td>{this.props.myChangeSet.when}</td>
             <td>{this.props.myChangeSet.where}</td>
