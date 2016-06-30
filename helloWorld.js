@@ -56,6 +56,7 @@ var Rows = React.createClass({
 
 var RecentChangesTable = React.createClass({
     render(){
+        console.log(this);
         return <table>
             {this.props.children}
         </table>;
@@ -66,11 +67,11 @@ var RecentChangesTable = React.createClass({
 //making a Top level component
 var App = React.createClass({
     render(){
-
-        return <table className="table">
+       console.log("I am gona render first");
+        return <RecentChangesTable>
             <Headings headings={this.props.myHeadings} />
             <Rows changeSets = {this.props.myData}/>
-        </table>;
+        </RecentChangesTable>;
 
     }
 });
