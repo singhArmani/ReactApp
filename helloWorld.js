@@ -56,7 +56,7 @@ var Rows = React.createClass({
 
 var RecentChangesTable = React.createClass({
     render(){
-        console.log(this);
+
         return <table>
             {this.props.children}
         </table>;
@@ -67,7 +67,7 @@ var RecentChangesTable = React.createClass({
 //making a Top level component
 var App = React.createClass({
     render(){
-       console.log("I am gona render first");
+       console.log(this);
         return <RecentChangesTable>
             <Headings headings={this.props.myHeadings} />
             <Rows changeSets = {this.props.myData}/>
@@ -90,7 +90,14 @@ var Data = [{
 
 var headings = ['Author','Where','Description'];
 
-ReactDOM.render(
-    <App myData ={Data}  myHeadings ={headings}/>,document.getElementById('example')
 
+//using E6 Spread Operator 
+var props = {myHeadings:headings, myData:Data};
+
+ReactDOM.render(
+    <App {...props}/>,document.getElementById('example')
+  /*In this case, all the properties of object are passed as props to the App component.
+We can pass any object that can contain any number of key value pairs and all of
+them will be passed as props to the component" */
 );
+
