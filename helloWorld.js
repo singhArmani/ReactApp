@@ -23,8 +23,8 @@ var Heading = React.createClass({
  */
 var Headings = React.createClass({
     render(){
-        var  headings = this.props.headings.map((heading)=>{
-            return(<Heading myHeading ={heading}/>); //it will return a small Heading Component
+        var  headings = this.props.headings.map((heading, index)=>{
+            return(<Heading key ={index} myHeading ={heading}/>); //it will return a small Heading Component
         });
 
         return (<thead><tr>{headings}</tr></thead>);
@@ -50,8 +50,8 @@ var Row = React.createClass({
 //lets build the Rows Component too
 var Rows = React.createClass({
     render(){
-        var rows = this.props.changeSets.map((changeSet)=>{
-            return(<Row myChangeSet = {changeSet}/>); //return smaller Row compoent with object passed as props
+        var rows = this.props.changeSets.map((changeSet, index)=>{
+            return(<Row key={index} myChangeSet = {changeSet}/>); //return smaller Row compoent with object passed as props
         });
 
         return (<tbody>{rows}</tbody>);
@@ -63,7 +63,6 @@ var Rows = React.createClass({
 
 var RecentChangesTable = React.createClass({
     render(){
-
         return <table>
             {this.props.children}
         </table>;
