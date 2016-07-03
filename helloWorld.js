@@ -74,14 +74,24 @@ var RecentChangesTable = React.createClass({
 var App = React.createClass({
     //Props validation
     propTypes:{
-        headings:React.PropTypes.array,
-        changeSets:React.PropTypes.array,
-        author: React.PropTypes.string.isRequired
+        //first twos are optional
+        myHeadings:React.PropTypes.array,
+        myData:React.PropTypes.array,
+        author: React.PropTypes.string.isRequired,
+        location:React.PropTypes.string.isRequired
 
     },
+
+    //Specifying default props
+    getDefaultProps(){
+        return {
+            myHeadings:['When happened', 'Who did it', 'What they Change']
+        };
+    },
+
     render(){
         return <RecentChangesTable>
-            <Headings author ="aman" headings={this.props.myHeadings} />
+            <Headings  headings={this.props.myHeadings} />
             <Rows changeSets = {this.props.myData}/>
         </RecentChangesTable>;
 
@@ -104,7 +114,7 @@ var headings = ['Author','Where','Description'];
 
 
 //using E6 Spread Operator 
-var props = {myHeadings:headings, myData:Data};
+var props = {myData:Data ,author:"aman", location:"sydney"};
 
 ReactDOM.render(
     <App {...props}/>,document.getElementById('example')
