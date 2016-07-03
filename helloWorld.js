@@ -72,10 +72,16 @@ var RecentChangesTable = React.createClass({
 
 //making a Top level component
 var App = React.createClass({
+    //Props validation
+    propTypes:{
+        headings:React.PropTypes.array,
+        changeSets:React.PropTypes.array,
+        author: React.PropTypes.string.isRequired
+
+    },
     render(){
-       console.log(this);
         return <RecentChangesTable>
-            <Headings headings={this.props.myHeadings} />
+            <Headings author ="aman" headings={this.props.myHeadings} />
             <Rows changeSets = {this.props.myData}/>
         </RecentChangesTable>;
 
