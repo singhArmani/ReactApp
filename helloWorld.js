@@ -63,7 +63,12 @@ var Rows = React.createClass({
 
 var RecentChangesTable = React.createClass({
     render(){
-        return <table>
+        var tableStyle = {
+              width:'100%',
+              border:'1px solid black'
+
+        }
+        return <table style={tableStyle}>
             {this.props.children}
         </table>;
     }
@@ -103,7 +108,6 @@ var App = React.createClass({
     },
 
     render(){
-        console.log("the state is: "+this.state.changeSets);
         return <RecentChangesTable>
             <Headings  headings={this.props.myHeadings} />
             <Rows changeSets = {this.state.changeSets}/>
