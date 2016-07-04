@@ -41,7 +41,7 @@ var Row = React.createClass({
         return (<tr style={trStyle}>
             <td>{this.props.myChangeSet.who}</td>
             <td>{this.props.myChangeSet.when}</td>
-            <td>{this.props.myChangeSet.where}</td>
+            <td>{this.props.myChangeSet.description}</td>
         </tr>);
     }
 });
@@ -72,49 +72,52 @@ var RecentChangesTable = React.createClass({
 
 //making a Top level component
 var App = React.createClass({
-    //Props validation
-    propTypes:{
-        //first twos are optional
-        myHeadings:React.PropTypes.array,
-        myData:React.PropTypes.array,
-        author: React.PropTypes.string.isRequired,
-        location:React.PropTypes.string.isRequired
 
-    },
-
-    //Specifying default props
-    getDefaultProps(){
+    //Setting initial State using getInitialState function
+    getInitialState(){
         return {
-            myHeadings:['When happened', 'Who did it', 'What they Change']
+            changeSets:[]
         };
     },
 
+    mapOpenLibraryDataToChangeSet(data){
+      return data.map((change, index)=>{
+            return {
+                "when": jQuery.timeago(change.timestamp),
+                 "who": change.author.key,
+                "description": change.comment
+            }
+        });
+    },
+
+    componentDidMount(){
+        $.ajax({
+            url: 'http://openlibrary.org/recentchanges.json?limit=10',
+            context: this,
+            dataType: 'json',
+            type: 'GET'
+        }).done(function(data){
+                var changeSets = this.mapOpenLibraryDataToChangeSet(data);
+                 this.setState({changeSets:changeSets});
+        });
+    },
+
     render(){
+        console.log("the state is: "+this.state.changeSets);
         return <RecentChangesTable>
             <Headings  headings={this.props.myHeadings} />
-            <Rows changeSets = {this.props.myData}/>
+            <Rows changeSets = {this.state.changeSets}/>
         </RecentChangesTable>;
 
     }
 });
 
-//our Data
-var Data = [{
-    'who': 'Malkeet Singh',
-    'when': '3 mins ago',
-    'where': 'Sydney Opera House'
-},
-    {
-        'who': 'Raman Singh',
-        'when': '5 mins ago',
-        'where': 'Imax'
-    }];
 
 var headings = ['Author','Where','Description'];
 
 
 //using E6 Spread Operator 
-var props = {myData:Data ,author:"aman", location:"sydney"};
+var props = { myHeadings:headings};
 
 ReactDOM.render(
     <App {...props}/>,document.getElementById('example')
